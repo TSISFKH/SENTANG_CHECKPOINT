@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>เข้าสู่ระบบ | SENTANG CHECKPOINT</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>SENTANG CHECKPOINT</h1>
+
+        <nav>
+            <a href="index.html">หน้าแรก</a>
+            <a href="test.html">ค้นหาเส้นทาง</a>
+            <a href="universities.html">มหาวิทยาลัย</a>
+            <a href="careers.html">อาชีพ</a>
+            <a href="forum.html">กระทู้</a>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <section>
+
+            <h2>เข้าสู่ระบบ</h2>
+
+            <p>
+                เข้าสู่ระบบเพื่อใช้งานฟอรัมและจัดการกระทู้ของคุณ
+            </p>
+
+
+            <form id="loginForm">
+
+                <div>
+                    <label for="username">
+                        ชื่อผู้ใช้
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="กรอกชื่อผู้ใช้"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="password">
+                        รหัสผ่าน
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="กรอกรหัสผ่าน"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit">
+                    เข้าสู่ระบบ
+                </button>
+
+            </form>
+
+
+            <p id="loginMessage"></p>
+
+
+            <hr>
+
+
+            <p>
+                ยังไม่มีบัญชี?
+            </p>
+
+            <button
+                type="button"
+                onclick="location.href='register.html'"
+            >
+                สมัครสมาชิก
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

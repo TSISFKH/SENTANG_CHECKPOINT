@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>แบบทดสอบ | SENTANG CHECKPOINT</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        SENTANG <span>CHECKPOINT</span>
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            หน้าแรก
+        </a>
+
+        <a href="test.html">
+            ค้นหาเส้นทาง
+        </a>
+
+        <a href="universities.html">
+            มหาวิทยาลัย
+        </a>
+
+        <a href="careers.html">
+            อาชีพ
+        </a>
+
+        <a href="forum.html">
+            เว็บบอร์ด
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main>
+
+    <section class="quiz-container">
+
+
+        <p class="subtitle">
+            DISCOVER YOURSELF
+        </p>
+
+
+        <h1>
+            แบบทดสอบความสนใจ
+        </h1>
+
+
+        <p class="description">
+            เลือกคำตอบที่ตรงกับคุณมากที่สุด
+            ไม่มีคำตอบถูกหรือผิด
+        </p>
+
+
+        <!-- แถบความคืบหน้า -->
+
+        <div class="progress-container">
+
+            <div id="progress"></div>
+
+        </div>
+
+
+        <p id="question-number"></p>
+
+
+        <!-- คำถาม -->
+
+        <div id="question-box">
+
+            <h2 id="question">
+                กำลังโหลดคำถาม...
+            </h2>
+
+
+            <div id="answers"></div>
+
+        </div>
+
+
+        <!-- ปุ่ม -->
+
+        <button
+            id="next-button"
+            class="main-button"
+            onclick="nextQuestion()"
+        >
+            ถัดไป →
+        </button>
+
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <h3>
+        SENTANG CHECKPOINT
+    </h3>
+
+    <p>
+        ค้นหาตัวเอง ก่อนเลือกเส้นทาง
+    </p>
+
+</footer>
+
+
+
+<script src="test.js"></script>
+
+</body>
+
+</html>

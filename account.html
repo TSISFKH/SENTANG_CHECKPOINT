@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>บัญชีของฉัน | SENTANG CHECKPOINT</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>SENTANG CHECKPOINT</h1>
+
+    <nav>
+
+        <a href="index.html">
+            หน้าแรก
+        </a>
+
+        <a href="test.html">
+            ค้นหาเส้นทาง
+        </a>
+
+        <a href="universities.html">
+            มหาวิทยาลัย
+        </a>
+
+        <a href="careers.html">
+            อาชีพ
+        </a>
+
+        <a href="forum.html">
+            กระทู้
+        </a>
+
+        <a href="account.html">
+            👤 บัญชีของฉัน
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main>
+
+
+    <!-- ========================================
+         Account
+    ======================================== -->
+
+    <section id="accountSection">
+
+        <h2>
+            👤 บัญชีของฉัน
+        </h2>
+
+        <p>
+            จัดการข้อมูลบัญชีและดูข้อมูลของคุณ
+        </p>
+
+
+        <div id="accountLoading">
+
+            กำลังโหลดข้อมูลบัญชี...
+
+        </div>
+
+
+        <div id="accountContent" hidden>
+
+
+            <!-- ========================================
+                 Profile
+            ======================================== -->
+
+            <div class="account-card">
+
+                <h3>
+                    ข้อมูลบัญชี
+                </h3>
+
+
+                <div class="account-item">
+
+                    <span class="account-label">
+                        ชื่อที่อยากให้เห็น
+                    </span>
+
+                    <strong id="displayName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="account-item">
+
+                    <span class="account-label">
+                        Username
+                    </span>
+
+                    <strong id="username">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="account-item">
+
+                    <span class="account-label">
+                        อีเมลหลัก
+                    </span>
+
+                    <strong id="email">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ========================================
+                 Activities
+            ======================================== -->
+
+            <div class="account-card">
+
+                <h3>
+                    กิจกรรมของฉัน
+                </h3>
+
+                <p>
+                    ส่วนนี้จะใช้สำหรับแสดงกิจกรรมของคุณ
+                    ในอนาคต เช่น กระทู้ ความคิดเห็น
+                    และข้อมูลที่บันทึกไว้
+                </p>
+
+
+                <div class="account-actions">
+
+                    <button
+                        type="button"
+                        onclick="location.href='forum.html'"
+                    >
+                        💬 กระทู้ของฉัน
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ========================================
+                 Account Actions
+            ======================================== -->
+
+            <div class="account-card">
+
+                <h3>
+                    จัดการบัญชี
+                </h3>
+
+
+                <div class="account-actions">
+
+                    <button
+                        type="button"
+                        id="logoutButton"
+                    >
+                        ออกจากระบบ
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ========================================
+             Login Required
+        ======================================== -->
+
+        <div
+            id="loginRequired"
+            hidden
+        >
+
+            <h3>
+                🔒 กรุณาเข้าสู่ระบบ
+            </h3>
+
+            <p>
+                คุณต้องเข้าสู่ระบบก่อนจึงจะสามารถดูบัญชีของคุณได้
+            </p>
+
+
+            <button
+                type="button"
+                onclick="location.href='login.html'"
+            >
+                เข้าสู่ระบบ
+            </button>
+
+
+            <button
+                type="button"
+                onclick="location.href='register.html'"
+            >
+                สมัครสมาชิก
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script src="account.js"></script>
+
+</body>
+
+</html>

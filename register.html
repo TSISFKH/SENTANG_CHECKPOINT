@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>สมัครสมาชิก | SENTANG CHECKPOINT</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>SENTANG CHECKPOINT</h1>
+
+    <nav>
+
+        <a href="index.html">
+            หน้าแรก
+        </a>
+
+        <a href="test.html">
+            ค้นหาเส้นทาง
+        </a>
+
+        <a href="universities.html">
+            มหาวิทยาลัย
+        </a>
+
+        <a href="careers.html">
+            อาชีพ
+        </a>
+
+        <a href="forum.html">
+            กระทู้
+        </a>
+
+        <a href="login.html">
+            เข้าสู่ระบบ
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+
+    <section>
+
+        <h2>
+            สมัครสมาชิก
+        </h2>
+
+        <p>
+            สร้างบัญชีเพื่อใช้งานฟอรัม
+            และฟีเจอร์สำหรับสมาชิก
+        </p>
+
+
+        <form id="registerForm">
+
+
+            <!-- Email -->
+
+            <div>
+
+                <label for="email">
+                    อีเมล
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@email.com"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Display Name -->
+
+            <div>
+
+                <label for="displayName">
+                    ชื่อที่อยากให้แสดง
+                </label>
+
+                <input
+                    type="text"
+                    id="displayName"
+                    placeholder="เช่น นักเรียน ม.4"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Username -->
+
+            <div>
+
+                <label for="username">
+                    ชื่อผู้ใช้
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="กรอกชื่อผู้ใช้"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div>
+
+                <label for="password">
+                    รหัสผ่าน
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="อย่างน้อย 6 ตัวอักษร"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div>
+
+                <label for="confirmPassword">
+                    ยืนยันรหัสผ่าน
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="กรอกรหัสผ่านอีกครั้ง"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                สมัครสมาชิก
+            </button>
+
+
+        </form>
+
+
+        <p id="registerMessage"></p>
+
+
+        <hr>
+
+
+        <p>
+            มีบัญชีอยู่แล้ว?
+        </p>
+
+
+        <button
+            type="button"
+            onclick="location.href='login.html'"
+        >
+            เข้าสู่ระบบ
+        </button>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="register.js"></script>
+
+
+</body>
+
+</html>

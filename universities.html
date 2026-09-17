@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        มหาวิทยาลัย | SENTANG CHECKPOINT
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+
+        SENTANG
+        <span>CHECKPOINT</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            หน้าแรก
+        </a>
+
+    <a href="test.html">
+        แบบทดสอบ
+    </a>
+        <a
+            href="universities.html"
+            class="active"
+        >
+            มหาวิทยาลัย
+        </a>
+
+        <a href="careers.html">
+            อาชีพ
+        </a>
+
+        <a href="forum.html">
+            เว็บบอร์ด
+        </a>
+
+    </nav>
+
+</header>
+
+<div class="page-back">
+    <a href="index.html">
+        ← กลับหน้าแรก
+    </a>
+</div>
+
+
+<main>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <section class="university-header">
+
+        <p class="subtitle">
+            UNIVERSITY
+        </p>
+
+        <h1>
+            ค้นหามหาวิทยาลัย
+        </h1>
+
+        <p>
+            สำรวจมหาวิทยาลัย คณะ สาขา
+            และข้อมูลที่เกี่ยวข้อง
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         SEARCH
+    ========================== -->
+
+    <section class="university-search">
+
+
+        <div class="search-box">
+
+            🔎
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ค้นหาชื่อมหาวิทยาลัย..."
+            >
+
+        </div>
+
+
+        <div class="filter-box">
+
+
+            <select id="regionFilter">
+
+                <option value="all">
+                    ทุกภูมิภาค
+                </option>
+
+                <option value="central">
+                    ภาคกลาง
+                </option>
+
+                <option value="north">
+                    ภาคเหนือ
+                </option>
+
+                <option value="northeast">
+                    ภาคตะวันออกเฉียงเหนือ
+                </option>
+
+                <option value="east">
+                    ภาคตะวันออก
+                </option>
+
+                <option value="south">
+                    ภาคใต้
+                </option>
+
+            </select>
+
+
+
+            <select id="typeFilter">
+
+                <option value="all">
+                    ทุกประเภท
+                </option>
+
+                <option value="public">
+                    มหาวิทยาลัยรัฐ
+                </option>
+
+                <option value="private">
+                    มหาวิทยาลัยเอกชน
+                </option>
+
+            </select>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         COMPARE BAR
+    ========================== -->
+
+    <div class="compare-bar">
+
+        <span>
+            🎓 เลือกมหาวิทยาลัยเพื่อเปรียบเทียบ
+        </span>
+
+
+        <button
+            onclick="goToCompare()"
+        >
+
+            เปรียบเทียบ
+
+            <span id="compareCount">
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+    <!-- =========================
+     มหาวิทยาลัยที่ฉันสนใจ
+========================== -->
+
+<section
+    id="favoriteSection"
+    class="favorite-section"
+    style="display: none;"
+>
+
+```
+<div class="favorite-header">
+
+    <div>
+
+        <p class="subtitle">
+            MY UNIVERSITIES
+        </p>
+
+        <h2>
+            ⭐ มหาวิทยาลัยที่ฉันสนใจ
+        </h2>
+
+    </div>
+
+    <span id="favoriteCount">
+        0 แห่ง
+    </span>
+
+</div>
+
+
+<div
+    id="favoriteList"
+    class="favorite-list"
+>
+
+</div>
+```
+
+</section>
+
+<!-- =========================
+     มหาวิทยาลัยทั้งหมด
+========================== -->
+
+<section
+    class="all-university-section"
+>
+
+```
+<h2>
+    🎓 มหาวิทยาลัยทั้งหมด
+</h2>
+```
+
+</section>
+
+
+
+    <!-- =========================
+         UNIVERSITY LIST
+    ========================== -->
+
+    <section
+        id="universityList"
+        class="university-grid"
+    >
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <h3>
+        SENTANG CHECKPOINT
+    </h3>
+
+    <p>
+        ค้นหาตัวเอง ก่อนเลือกเส้นทาง
+    </p>
+
+</footer>
+
+
+
+<script src="universities.js"></script>
+
+</body>
+
+</html>

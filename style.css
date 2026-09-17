@@ -1,0 +1,3883 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
+/* ========================================
+   SENTANG CHECKPOINT
+   STYLE.CSS
+   BLUE • ORANGE • WHITE THEME
+   ======================================== */
+
+
+/* ========================================
+   VARIABLES
+   ======================================== */
+
+:root {
+    --sentang-blue: #123B6D;
+    --sentang-blue-dark: #0B2A4A;
+    --sentang-blue-light: #EAF2FB;
+
+    --sentang-orange: #F28C28;
+    --sentang-orange-dark: #D96F0B;
+    --sentang-orange-light: #FFF3E6;
+
+    --sentang-white: #FFFFFF;
+
+    --sentang-bg: #F6F8FB;
+    --sentang-text: #1F2937;
+    --sentang-muted: #64748B;
+    --sentang-border: #D9E2EC;
+}
+
+
+/* ========================================
+   พื้นฐาน
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        "Noto Sans Thai",
+        sans-serif;
+    background: var(--sentang-bg);
+    color: var(--sentang-text);
+}
+
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+header {
+    min-height: 72px;
+
+    background: var(--sentang-blue);
+    color: var(--sentang-white);
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 7%;
+
+    border-bottom: 1px solid
+        var(--sentang-blue-dark);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+
+    color: var(--sentang-white);
+
+    margin-right: auto;
+}
+
+.logo span {
+    color: var(--sentang-orange);
+}
+
+header h1 {
+    color: var(--sentang-white);
+}
+
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: var(--sentang-white);
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+nav a:hover {
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    color: var(--sentang-orange);
+}
+
+
+/* ========================================
+   MAIN
+   ======================================== */
+
+main {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 60px 25px;
+}
+
+main > section {
+    border-color:
+        var(--sentang-border);
+}
+
+
+/* ========================================
+   HEADINGS
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--sentang-blue);
+}
+
+h2 {
+    border-left:
+        5px solid var(--sentang-orange);
+
+    padding-left: 12px;
+}
+
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+    color: var(--sentang-blue);
+}
+
+a:hover {
+    color: var(--sentang-orange-dark);
+}
+
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.hero {
+    min-height: 500px;
+
+    padding: 70px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--sentang-blue-light),
+            var(--sentang-white)
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.subtitle {
+    color: var(--sentang-orange-dark);
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: 58px;
+
+    line-height: 1.15;
+
+    margin: 15px 0 20px;
+}
+
+.description {
+    color: var(--sentang-muted);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    max-width: 600px;
+}
+
+
+/* ========================================
+   BUTTON
+   ======================================== */
+
+button {
+    font-family: inherit;
+
+    cursor: pointer;
+
+    background: var(--sentang-orange);
+
+    color: var(--sentang-white);
+
+    border: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:hover {
+    background:
+        var(--sentang-orange-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(242, 140, 40, 0.25);
+}
+
+
+/* ========================================
+   MAIN BUTTON
+   ======================================== */
+
+.main-button {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 14px 25px;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border-radius: 13px;
+
+    transition: 0.2s;
+}
+
+.main-button:hover {
+    background:
+        var(--sentang-orange-dark);
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   SECONDARY BUTTON
+   ======================================== */
+
+.secondary-button {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 14px 25px;
+
+    background: white;
+
+    color: var(--sentang-blue);
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border-radius: 13px;
+
+    border:
+        2px solid var(--sentang-blue);
+
+    transition: 0.2s;
+}
+
+.secondary-button:hover {
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue-dark);
+}
+
+
+/* ========================================
+   HERO CARD
+   ======================================== */
+
+.hero-card {
+    width: 300px;
+    height: 300px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(18, 59, 109, 0.12);
+}
+
+.compass {
+    font-size: 70px;
+}
+
+.hero-card p {
+    color: var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   FEATURES
+   ======================================== */
+
+.features {
+    margin-top: 80px;
+}
+
+.features h2 {
+    font-size: 32px;
+
+    margin-bottom: 30px;
+}
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.feature {
+    background: white;
+
+    padding: 30px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 20px;
+
+    transition: 0.2s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 15px 35px
+        rgba(18, 59, 109, 0.08);
+}
+
+.icon {
+    font-size: 40px;
+}
+
+.feature p {
+    color: var(--sentang-muted);
+
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+footer {
+    background: white;
+
+    text-align: center;
+
+    padding: 40px;
+
+    border-top:
+        1px solid var(--sentang-border);
+}
+
+footer h3 {
+    color: var(--sentang-blue);
+}
+
+footer p {
+    color: var(--sentang-muted);
+}
+
+
+/* ========================================
+   INFO / SPECIAL SECTIONS
+   ======================================== */
+
+.blue-section {
+    background:
+        var(--sentang-blue);
+
+    color: white;
+}
+
+.orange-section {
+    background:
+        var(--sentang-orange);
+
+    color: white;
+}
+
+.info-box,
+.info-section {
+    background:
+        var(--sentang-blue-light);
+
+    border-left:
+        4px solid var(--sentang-blue);
+}
+
+.highlight,
+.badge,
+.tag {
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+
+/* ========================================
+   FORM
+   ======================================== */
+
+input,
+textarea,
+select {
+    background:
+        var(--sentang-white);
+
+    color:
+        var(--sentang-text);
+
+    border:
+        1px solid var(--sentang-border);
+
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color:
+        var(--sentang-blue);
+
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(18, 59, 109, 0.12);
+}
+
+
+/* ========================================
+   QUIZ
+   ======================================== */
+
+.quiz-container {
+    max-width: 800px;
+
+    margin: auto;
+}
+
+.progress-container {
+    width: 100%;
+
+    height: 10px;
+
+    background:
+        var(--sentang-border);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 30px 0 15px;
+}
+
+#progress {
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        var(--sentang-orange);
+
+    transition: 0.3s;
+}
+
+#question-number {
+    color: var(--sentang-muted);
+
+    font-size: 14px;
+}
+
+#question {
+    margin-top: 30px;
+
+    margin-bottom: 25px;
+}
+
+.answer-button {
+    display: block;
+
+    width: 100%;
+
+    padding: 18px;
+
+    margin: 12px 0;
+
+    background: white;
+
+    border:
+        2px solid var(--sentang-border);
+
+    border-radius: 14px;
+
+    text-align: left;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.answer-button:hover {
+    border-color:
+        var(--sentang-blue);
+
+    background:
+        var(--sentang-blue-light);
+}
+
+.answer-button.selected {
+    border-color:
+        var(--sentang-orange);
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   RESULT PAGE
+   ======================================== */
+
+.result-page {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.result-card {
+    max-width: 850px;
+
+    margin: 35px auto;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 25px;
+
+    padding: 45px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 40px
+        rgba(18, 59, 109, 0.08);
+}
+
+.result-icon,
+.result-big-icon {
+    font-size: 70px;
+}
+
+.result-label {
+    color:
+        var(--sentang-orange-dark);
+
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+.result-card h2 {
+    font-size: 32px;
+
+    margin: 10px 0 15px;
+}
+
+.result-description {
+    max-width: 650px;
+
+    margin: auto;
+
+    color: var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.result-section {
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid var(--sentang-border);
+}
+
+.result-section h3 {
+    margin-bottom: 18px;
+}
+
+.result-tags {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.result-tags span {
+    padding: 9px 15px;
+
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue);
+
+    border-radius: 20px;
+
+    font-size: 14px;
+}
+
+.result-note {
+    margin-top: 30px;
+
+    padding: 18px;
+
+    background:
+        var(--sentang-bg);
+
+    border-radius: 15px;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+.result-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+}
+
+
+/* ========================================
+   MAIN RESULT
+   ======================================== */
+
+.main-result {
+    text-align: center;
+}
+
+.main-result h2 {
+    font-size: 30px;
+
+    margin: 5px 0 10px;
+}
+
+.result-percentage {
+    font-size: 42px;
+
+    font-weight: bold;
+
+    color:
+        var(--sentang-orange);
+}
+
+.result-card hr {
+    border: none;
+
+    border-top:
+        1px solid var(--sentang-border);
+
+    margin: 30px 0;
+}
+
+.score-section h3,
+.recommend-section h3 {
+    margin-bottom: 20px;
+}
+
+.score-item {
+    margin-bottom: 18px;
+}
+
+.score-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+}
+
+.score-title strong {
+    color:
+        var(--sentang-orange-dark);
+}
+
+.score-bar {
+    height: 9px;
+
+    background:
+        var(--sentang-border);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.score-bar div {
+    height: 100%;
+
+    background:
+        var(--sentang-orange);
+
+    border-radius: 20px;
+}
+
+.recommend-section {
+    margin-top: 25px;
+}
+
+.recommend-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.recommend-tags span {
+    padding: 9px 14px;
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+.result-empty {
+    text-align: center;
+
+    padding: 30px;
+}
+
+.result-empty p {
+    color:
+        var(--sentang-muted);
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   FREE THINKING
+   ======================================== */
+
+.thinking-card textarea {
+    width: 100%;
+
+    min-height: 180px;
+
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    padding: 22px 24px;
+
+    background:
+        var(--sentang-white);
+
+    border:
+        1.5px solid var(--sentang-border);
+
+    border-radius: 20px;
+
+    color:
+        var(--sentang-text);
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+.thinking-card textarea::placeholder {
+    color: #A4AABA;
+
+    opacity: 1;
+}
+
+.thinking-card textarea:focus {
+    background: white;
+
+    border-color:
+        var(--sentang-blue);
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.08);
+}
+
+.thinking-card textarea:hover {
+    border-color:
+        var(--sentang-orange);
+}
+
+
+/* ========================================
+   UNIVERSITY PAGE
+   ======================================== */
+
+.university-header {
+    max-width: 900px;
+
+    margin: 70px auto 35px;
+
+    padding: 0 20px;
+}
+
+.university-header h1 {
+    font-size: 42px;
+
+    margin: 10px 0;
+}
+
+.university-header p {
+    color: var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.university-search {
+    max-width: 900px;
+
+    margin: 0 auto 40px;
+
+    padding: 0 20px;
+}
+
+.search-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 20px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 15px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 15px;
+}
+
+.filter-box {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 15px;
+}
+
+.filter-box select {
+    padding: 12px 15px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 12px;
+
+    background: white;
+
+    font-family: inherit;
+
+    color:
+        var(--sentang-text);
+}
+
+
+/* ========================================
+   UNIVERSITY GRID
+   ======================================== */
+
+.university-grid {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 0 20px 80px;
+
+    display: grid;
+
+    gap: 18px;
+}
+
+.university-card {
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    transition: 0.2s;
+}
+
+.university-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 12px 30px
+        rgba(18, 59, 109, 0.08);
+}
+
+.university-card-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+.university-icon {
+    width: 180px;
+
+    height: 120px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background:
+        var(--sentang-blue-light);
+}
+
+.university-icon img {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+.university-info {
+    min-width: 0;
+}
+
+.university-info h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+
+    line-height: 1.4;
+
+    color:
+        var(--sentang-blue);
+}
+
+.university-info p {
+    margin: 5px 0;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+.university-location {
+    font-size: 13px;
+}
+
+.university-card-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.university-card-actions button {
+    min-width: 105px;
+
+    white-space: nowrap;
+}
+
+.no-result {
+    text-align: center;
+
+    padding: 70px 20px;
+
+    color:
+        var(--sentang-muted);
+}
+
+
+/* ========================================
+   UNIVERSITY DETAIL
+   ======================================== */
+
+.detail-back {
+    max-width: 1000px;
+
+    margin: 40px auto 0;
+
+    padding: 0 20px;
+}
+
+.detail-back a,
+.page-back a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 18px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 11px;
+
+    color:
+        var(--sentang-blue);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.detail-back a:hover,
+.page-back a:hover {
+    color:
+        var(--sentang-orange-dark);
+
+    border-color:
+        var(--sentang-orange);
+
+    background:
+        var(--sentang-orange-light);
+
+    transform: translateX(-3px);
+}
+
+.university-detail {
+    max-width: 1000px;
+
+    margin: 35px auto 90px;
+
+    padding: 0 20px;
+}
+
+
+/* ========================================
+   UNIVERSITY DETAIL HERO
+   ======================================== */
+
+.detail-hero {
+    position: relative;
+
+    width: 100%;
+
+    height: 360px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        var(--sentang-blue-light);
+
+    box-shadow:
+        0 18px 45px
+        rgba(18, 59, 109, 0.08);
+}
+
+.detail-icon {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+
+    border-radius: 0;
+
+    overflow: hidden;
+
+    z-index: 1;
+
+    background:
+        var(--sentang-blue-light);
+}
+
+.detail-icon img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+.detail-hero::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(11, 42, 74, 0.88) 0%,
+            rgba(11, 42, 74, 0.45) 45%,
+            rgba(11, 42, 74, 0.05) 100%
+        );
+}
+
+.detail-hero > div:last-child {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 3;
+
+    padding: 90px 40px 30px;
+
+    color: white;
+}
+
+.detail-hero > div:last-child h1 {
+    margin: 5px 0 10px;
+
+    color: white;
+
+    font-size: 38px;
+
+    line-height: 1.25;
+}
+
+.detail-hero > div:last-child .subtitle {
+    color:
+        rgba(255, 255, 255, 0.9);
+}
+
+.detail-hero > div:last-child .detail-location {
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.9);
+}
+
+
+/* ========================================
+   UNIVERSITY IMAGE
+   ======================================== */
+
+.university-image {
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 22px;
+
+    margin-bottom: 22px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    box-shadow:
+        0 12px 30px
+        rgba(18, 59, 109, 0.08);
+}
+
+.university-image-wrapper {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    margin-bottom: 25px;
+}
+
+.university-image-wrapper img {
+    width: 100%;
+
+    height: 320px;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.university-image-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+
+/* ========================================
+   DETAIL CONTENT
+   ======================================== */
+
+.detail-content {
+    margin-top: 25px;
+
+    display: grid;
+
+    gap: 18px;
+}
+
+.detail-section {
+    position: relative;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    margin-bottom: 0;
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.035);
+
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.detail-section:hover {
+    box-shadow:
+        0 12px 30px
+        rgba(18, 59, 109, 0.06);
+}
+
+.detail-section h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 18px;
+
+    font-size: 21px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.detail-section h2::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    margin-left: 10px;
+
+    background:
+        var(--sentang-border);
+}
+
+.detail-section p {
+    margin: 0;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.9;
+}
+
+
+/* ========================================
+   FACULTY LIST
+   ======================================== */
+
+.faculty-detail-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.faculty-detail-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 52px;
+
+    padding: 13px 16px;
+
+    background:
+        var(--sentang-bg);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 14px;
+
+    color:
+        var(--sentang-text);
+
+    line-height: 1.5;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.faculty-detail-item:hover {
+    background:
+        var(--sentang-blue-light);
+
+    border-color:
+        var(--sentang-blue);
+
+    transform: translateX(3px);
+}
+
+.faculty-detail-item span:first-child {
+    width: 28px;
+
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+
+/* ========================================
+   CAREER TAGS
+   ======================================== */
+
+.career-tag-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.career-tag-list span {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 10px 16px;
+
+    background:
+        var(--sentang-orange-light);
+
+    border:
+        1px solid #F7C892;
+
+    color:
+        var(--sentang-orange-dark);
+
+    border-radius: 999px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.career-tag-list span:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(242, 140, 40, 0.10);
+}
+
+
+/* ========================================
+   UNIVERSITY COMPARISON
+   ======================================== */
+
+.compare-bar {
+    max-width: 900px;
+
+    margin: 0 auto 20px;
+
+    padding: 15px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background:
+        var(--sentang-blue-light);
+
+    border-radius: 15px;
+
+    color:
+        var(--sentang-text);
+}
+
+.compare-bar button {
+    border: none;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.university-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.detail-button,
+.compare-button {
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.detail-button {
+    background:
+        var(--sentang-blue);
+
+    color: white;
+}
+
+.compare-button {
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue);
+}
+
+.compare-button.selected {
+    background:
+        var(--sentang-orange);
+
+    color: white;
+}
+
+
+/* ========================================
+   COMPARE PAGE
+   ======================================== */
+
+.compare-page-header {
+    max-width: 900px;
+
+    margin: 70px auto 35px;
+
+    padding: 0 20px;
+}
+
+.compare-page-header h1 {
+    font-size: 42px;
+
+    margin: 10px 0;
+}
+
+.compare-page-header p {
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.compare-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 18px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    background: white;
+}
+
+.compare-table {
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+.compare-table thead th {
+    padding: 25px 20px;
+
+    background:
+        var(--sentang-blue-light);
+
+    border-bottom:
+        1px solid var(--sentang-border);
+
+    text-align: center;
+
+    color:
+        var(--sentang-blue);
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 20px;
+
+    border-bottom:
+        1px solid var(--sentang-border);
+
+    vertical-align: top;
+}
+
+.compare-table tbody th {
+    width: 180px;
+
+    text-align: left;
+
+    background:
+        var(--sentang-bg);
+
+    font-weight: 600;
+}
+
+.compare-table td {
+    text-align: center;
+
+    line-height: 1.7;
+}
+
+.compare-university {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.compare-icon {
+    font-size: 42px;
+}
+
+.compare-university h2 {
+    margin: 0;
+
+    font-size: 20px;
+
+    line-height: 1.4;
+}
+
+.compare-faculties {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: left;
+}
+
+.compare-faculties span {
+    display: block;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    background:
+        var(--sentang-blue-light);
+}
+
+.compare-actions {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 25px;
+}
+
+.compare-clear-button {
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background:
+        var(--sentang-border);
+
+    color:
+        var(--sentang-text);
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.compare-clear-button:hover {
+    transform: translateY(-2px);
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+
+/* ========================================
+   CAREER PAGE
+   ======================================== */
+
+.career-header {
+    max-width: 900px;
+
+    margin: 70px auto 35px;
+
+    padding: 0 20px;
+}
+
+.career-header h1 {
+    font-size: 42px;
+
+    margin: 10px 0;
+}
+
+.career-header p {
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.career-search {
+    max-width: 900px;
+
+    margin: 0 auto 30px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    gap: 15px;
+}
+
+.career-search .search-box {
+    flex: 1;
+}
+
+.career-search select {
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 12px;
+
+    padding: 0 15px;
+
+    background: white;
+
+    font-family: inherit;
+
+    color:
+        var(--sentang-text);
+}
+
+.career-grid {
+    max-width: 900px;
+
+    margin: 0 auto 80px;
+
+    padding: 0 20px;
+
+    display: grid;
+
+    gap: 18px;
+}
+
+.career-card {
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        60px 1fr auto;
+
+    gap: 18px;
+
+    align-items: center;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.career-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.06);
+}
+
+.career-icon {
+    width: 55px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    background:
+        var(--sentang-blue-light);
+
+    border-radius: 15px;
+}
+
+.career-info h2 {
+    margin: 0 0 8px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.career-info p {
+    margin: 0 0 10px;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+.career-study {
+    font-size: 14px;
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+.career-detail-button {
+    border: none;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.career-detail-button:hover {
+    background:
+        var(--sentang-orange-dark);
+}
+
+
+/* ========================================
+   CAREER DETAIL
+   ======================================== */
+
+.career-detail-hero {
+    max-width: 900px;
+
+    margin: 70px auto 40px;
+
+    padding: 45px;
+
+    background:
+        var(--sentang-blue-light);
+
+    border-radius: 25px;
+
+    border-left:
+        5px solid var(--sentang-orange);
+}
+
+.career-detail-icon {
+    font-size: 55px;
+
+    margin-bottom: 15px;
+}
+
+.career-detail-hero h1 {
+    font-size: 45px;
+
+    margin: 10px 0;
+}
+
+.career-detail-hero p {
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.career-detail-content {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 0 20px;
+
+    display: grid;
+
+    gap: 18px;
+}
+
+.career-info-section {
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 18px;
+}
+
+.career-info-section h2 {
+    margin-top: 0;
+}
+
+.career-info-section p,
+.career-info-section li {
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.career-study-path {
+    max-width: 900px;
+
+    margin: 35px auto;
+
+    padding: 30px 20px;
+}
+
+.career-study-path h2 {
+    margin-bottom: 25px;
+}
+
+.career-path {
+    display: grid;
+
+    gap: 15px;
+}
+
+.career-path-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 15px;
+}
+
+.career-path-number {
+    min-width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.career-path-item p {
+    margin: 0;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   CAREER → UNIVERSITY
+   ======================================== */
+
+.career-faculty-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.career-faculty {
+    padding: 10px 15px;
+
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue);
+
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+.career-section-description {
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.7;
+}
+
+.career-university-section {
+    margin-top: 40px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--sentang-blue-light),
+            white
+        );
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 24px;
+}
+
+.career-university-section h2 {
+    margin-top: 0;
+
+    margin-bottom: 8px;
+
+    font-size: 24px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.career-university-section > p {
+    margin-bottom: 25px;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.7;
+}
+
+.career-university-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.career-university-card {
+    position: relative;
+
+    padding: 24px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.career-university-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--sentang-blue),
+            var(--sentang-orange)
+        );
+}
+
+.career-university-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 15px 35px
+        rgba(18, 59, 109, 0.10);
+}
+
+.career-university-card h3 {
+    margin: 0 0 10px;
+
+    font-size: 19px;
+
+    color:
+        var(--sentang-blue);
+
+    line-height: 1.4;
+}
+
+.career-university-card p {
+    margin: 0;
+
+    color:
+        var(--sentang-muted);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.career-university-card button,
+.career-university-card a {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding: 9px 15px;
+
+    border-radius: 10px;
+
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    border: none;
+
+    transition: 0.2s;
+}
+
+.career-university-card button:hover,
+.career-university-card a:hover {
+    background:
+        var(--sentang-orange);
+
+    color: white;
+}
+
+
+/* ========================================
+   CAREER RECOMMENDATION
+   ======================================== */
+
+.career-recommend-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+.career-recommend-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+
+    padding: 18px;
+
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.career-recommend-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.08);
+}
+
+.career-recommend-icon {
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        var(--sentang-blue-light);
+
+    border-radius: 14px;
+
+    font-size: 24px;
+}
+
+.career-recommend-name {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.career-recommend-name strong {
+    font-size: 16px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.career-recommend-name span {
+    font-size: 13px;
+
+    color:
+        var(--sentang-muted);
+}
+
+.recommend-description {
+    color:
+        var(--sentang-muted);
+
+    margin-bottom: 5px;
+}
+
+
+/* ========================================
+   DETAIL IMAGE
+   ======================================== */
+
+.detail-image {
+    width: 180px;
+
+    height: 140px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        var(--sentang-blue-light);
+
+    box-shadow:
+        0 10px 25px
+        rgba(18, 59, 109, 0.10);
+}
+
+.detail-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.detail-image:hover img {
+    transform: scale(1.05);
+}
+
+
+/* ========================================
+   FAVORITE UNIVERSITY
+   ======================================== */
+
+.favorite-section {
+    margin: 30px auto;
+
+    max-width: 1200px;
+
+    padding: 25px;
+
+    border:
+        2px solid var(--sentang-orange);
+
+    border-radius: 18px;
+
+    background:
+        var(--sentang-orange-light);
+}
+
+.favorite-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.favorite-header h2 {
+    margin: 5px 0 0;
+}
+
+.favorite-header > span {
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.favorite-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.favorite-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 15px 18px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    border:
+        1px solid #F7C892;
+}
+
+.favorite-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.favorite-icon {
+    font-size: 28px;
+}
+
+.favorite-info h3 {
+    margin: 0 0 5px;
+}
+
+.favorite-info p {
+    margin: 0;
+}
+
+.favorite-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.remove-favorite-button {
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+.all-university-section {
+    max-width: 1200px;
+
+    margin: 35px auto 15px;
+}
+
+.all-university-section h2 {
+    margin: 0;
+}
+
+.favorite-button {
+    border:
+        1px solid var(--sentang-orange);
+
+    border-radius: 10px;
+
+    padding: 9px 14px;
+
+    cursor: pointer;
+
+    background:
+        var(--sentang-orange-light);
+
+    color:
+        var(--sentang-orange-dark);
+}
+
+.favorite-button.selected {
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   FORUM PAGE
+   ======================================== */
+
+.forum-page {
+    max-width: 950px;
+
+    margin: 0 auto;
+}
+
+.forum-header {
+    margin-bottom: 35px;
+}
+
+.forum-header h2 {
+    margin: 0 0 10px;
+
+    font-size: 38px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.forum-header p {
+    margin: 0;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.8;
+}
+
+.forum-section {
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.04);
+}
+
+.forum-section h3 {
+    margin: 0 0 22px;
+
+    font-size: 22px;
+
+    color:
+        var(--sentang-blue);
+}
+
+
+/* ========================================
+   CREATE POST
+   ======================================== */
+
+#createPostForm {
+    display: grid;
+
+    gap: 17px;
+}
+
+#createPostForm div,
+#replyForm div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+#createPostForm label,
+#replyForm label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color:
+        var(--sentang-text);
+}
+
+#createPostForm input,
+#createPostForm textarea,
+#replyForm input,
+#replyForm textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 12px;
+
+    background:
+        var(--sentang-bg);
+
+    color:
+        var(--sentang-text);
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#createPostForm input:focus,
+#createPostForm textarea:focus,
+#replyForm input:focus,
+#replyForm textarea:focus {
+    background: white;
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(242, 140, 40, 0.10);
+}
+
+#createPostForm textarea,
+#replyForm textarea {
+    min-height: 140px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+#createPostForm button,
+#replyForm button {
+    width: fit-content;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#createPostForm button:hover,
+#replyForm button:hover {
+    background:
+        var(--sentang-orange-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(242, 140, 40, 0.18);
+}
+
+#createPostMessage,
+#replyMessage {
+    margin: 12px 0 0;
+
+    color:
+        var(--sentang-orange-dark);
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   FORUM POST LIST
+   ======================================== */
+
+#forumList {
+    display: grid;
+
+    gap: 15px;
+}
+
+.forum-post {
+    padding: 22px;
+
+    background:
+        var(--sentang-bg);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 17px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.forum-post:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 10px 25px
+        rgba(18, 59, 109, 0.07);
+}
+
+.forum-post h4 {
+    margin: 0 0 10px;
+
+    font-size: 19px;
+
+    color:
+        var(--sentang-blue);
+
+    line-height: 1.5;
+}
+
+.forum-post p {
+    margin: 6px 0;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.6;
+}
+
+.forum-post p:nth-of-type(1) {
+    color:
+        var(--sentang-text);
+}
+
+.forum-post p:nth-of-type(3) {
+    font-size: 13px;
+
+    color:
+        #9AA2B1;
+}
+
+.forum-post button {
+    margin-top: 12px;
+
+    padding: 9px 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        var(--sentang-blue-light);
+
+    color:
+        var(--sentang-blue);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.forum-post button:hover {
+    background:
+        var(--sentang-orange);
+
+    color: white;
+}
+
+
+/* ========================================
+   POST DETAIL
+   ======================================== */
+
+#postDetailSection {
+    background: white;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.04);
+}
+
+#postDetailSection h3 {
+    margin: 0 0 10px;
+
+    font-size: 28px;
+
+    color:
+        var(--sentang-blue);
+
+    line-height: 1.5;
+}
+
+#detailAuthor {
+    margin: 0;
+
+    color:
+        var(--sentang-orange-dark);
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+#detailDate {
+    margin: 5px 0 20px;
+
+    color:
+        #9AA2B1;
+
+    font-size: 13px;
+}
+
+#detailContent {
+    color:
+        var(--sentang-text);
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+}
+
+#postDetailSection hr {
+    border: none;
+
+    border-top:
+        1px solid var(--sentang-border);
+
+    margin: 30px 0;
+}
+
+#postDetailSection h4 {
+    margin: 0 0 17px;
+
+    font-size: 20px;
+
+    color:
+        var(--sentang-blue);
+}
+
+#replyList {
+    display: grid;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.forum-reply {
+    padding: 17px 19px;
+
+    background:
+        var(--sentang-bg);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 15px;
+}
+
+.forum-reply p {
+    margin: 4px 0;
+
+    color:
+        var(--sentang-text);
+
+    line-height: 1.7;
+}
+
+.forum-reply p:first-child {
+    color:
+        var(--sentang-text);
+
+    white-space: pre-wrap;
+}
+
+.forum-reply p:nth-child(2) {
+    margin-top: 10px;
+
+    color:
+        var(--sentang-orange-dark);
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.forum-reply p:nth-child(3) {
+    color:
+        #9AA2B1;
+
+    font-size: 12px;
+}
+
+#forumList > p {
+    margin: 0;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background:
+        var(--sentang-bg);
+
+    border:
+        1px dashed var(--sentang-border);
+
+    border-radius: 16px;
+
+    color:
+        var(--sentang-muted);
+
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   REGISTER / LOGIN PAGE
+   ======================================== */
+
+#registerForm,
+#loginForm {
+    max-width: 500px;
+
+    margin: 30px auto;
+
+    padding: 30px;
+
+    background:
+        var(--sentang-white);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(18, 59, 109, 0.08);
+}
+
+#registerForm div,
+#loginForm div {
+    margin-bottom: 20px;
+}
+
+#registerForm label,
+#loginForm label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color:
+        var(--sentang-blue);
+}
+
+#registerForm input,
+#loginForm input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+#registerForm input:focus,
+#loginForm input:focus {
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(242, 140, 40, 0.12);
+}
+
+#registerForm button,
+#loginForm button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    background:
+        var(--sentang-orange);
+
+    color: white;
+}
+
+#registerForm button:hover,
+#loginForm button:hover {
+    background:
+        var(--sentang-orange-dark);
+
+    transform: translateY(-2px);
+}
+
+#registerMessage,
+#loginMessage {
+    text-align: center;
+
+    font-weight: 600;
+
+    margin: 15px 0;
+}
+
+
+/* ========================================
+   REGISTER / LOGIN CONTAINER
+   ======================================== */
+
+main > section:has(#registerForm),
+main > section:has(#loginForm) {
+    max-width: 650px;
+
+    margin: 50px auto;
+
+    padding: 40px;
+
+    background:
+        var(--sentang-white);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(18, 59, 109, 0.06);
+}
+
+main > section:has(#registerForm) h2,
+main > section:has(#loginForm) h2 {
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+main > section:has(#registerForm) > p,
+main > section:has(#loginForm) > p {
+    text-align: center;
+}
+
+main > section:has(#registerForm) > button,
+main > section:has(#loginForm) > button {
+    display: block;
+
+    margin: 10px auto;
+
+    padding: 11px 25px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background:
+        var(--sentang-blue);
+
+    color: white;
+}
+
+
+/* ========================================
+   ACCOUNT PAGE
+   ======================================== */
+
+#accountSection {
+    max-width: 750px;
+
+    margin: 50px auto;
+
+    padding: 40px;
+
+    background:
+        var(--sentang-white);
+
+    border:
+        1px solid var(--sentang-border);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(18, 59, 109, 0.06);
+}
+
+#accountSection > h2 {
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+#accountSection > p {
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color:
+        var(--sentang-muted);
+}
+
+#accountLoading {
+    text-align: center;
+
+    padding: 30px;
+
+    font-weight: 600;
+
+    color:
+        var(--sentang-blue);
+}
+
+.account-card {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    border-radius: 18px;
+
+    border-top:
+        4px solid var(--sentang-blue);
+
+    box-shadow:
+        0 6px 20px
+        rgba(18, 59, 109, 0.06);
+}
+
+.account-card h3 {
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    color:
+        var(--sentang-blue);
+}
+
+.account-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 16px 0;
+
+    border-bottom:
+        1px solid var(--sentang-border);
+}
+
+.account-item:last-child {
+    border-bottom: none;
+}
+
+.account-label {
+    color:
+        var(--sentang-muted);
+
+    font-size: 15px;
+}
+
+.account-item strong {
+    text-align: right;
+
+    word-break: break-word;
+
+    color:
+        var(--sentang-text);
+}
+
+.account-actions {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.account-actions button,
+#loginRequired button {
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.account-actions button:hover,
+#loginRequired button:hover {
+    transform: translateY(-2px);
+}
+
+#loginRequired {
+    background: white;
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(18, 59, 109, 0.06);
+}
+
+#loginRequired h3 {
+    margin-top: 0;
+
+    color:
+        var(--sentang-blue);
+}
+
+#loginRequired p {
+    margin-bottom: 25px;
+
+    color:
+        var(--sentang-muted);
+}
+
+
+/* ========================================
+   GENERAL CARD
+   ======================================== */
+
+.card,
+.faculty-card,
+.forum-card {
+    background:
+        var(--sentang-white);
+
+    border:
+        1px solid var(--sentang-border);
+}
+
+.card:hover,
+.faculty-card:hover,
+.forum-card:hover {
+    border-color:
+        var(--sentang-orange);
+
+    box-shadow:
+        0 8px 22px
+        rgba(18, 59, 109, 0.10);
+}
+
+
+/* ========================================
+   PAGE BACK
+   ======================================== */
+
+.page-back {
+    max-width: 1200px;
+
+    margin: 25px auto 0;
+
+    padding: 0 20px;
+}
+
+
+/* ========================================
+   MUTED TEXT
+   ======================================== */
+
+.muted {
+    color:
+        var(--sentang-muted);
+}
+
+
+/* ========================================
+   HORIZONTAL LINE
+   ======================================== */
+
+hr {
+    border: none;
+
+    border-top:
+        1px solid var(--sentang-border);
+}
+
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background:
+        var(--sentang-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        var(--sentang-blue);
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        var(--sentang-orange);
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 40px 25px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-card {
+        width: 230px;
+
+        height: 230px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .career-university-list {
+        grid-template-columns: 1fr;
+    }
+
+    .career-university-section {
+        padding: 22px;
+    }
+
+    .faculty-detail-list {
+        grid-template-columns: 1fr;
+    }
+
+    .university-image-wrapper img {
+        height: 240px;
+    }
+
+    .university-image {
+        height: 240px;
+    }
+
+    .compare-bar {
+        margin-left: 20px;
+
+        margin-right: 20px;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        align-items: stretch;
+    }
+
+    .compare-bar button {
+        width: 100%;
+    }
+
+    .university-actions {
+        width: 100%;
+    }
+
+    .detail-button,
+    .compare-button {
+        width: 100%;
+    }
+
+    .career-search {
+        flex-direction: column;
+    }
+
+    .career-search select {
+        height: 45px;
+    }
+
+    .career-card {
+        grid-template-columns:
+            50px 1fr;
+    }
+
+    .career-detail-button {
+        grid-column: 1 / -1;
+
+        width: 100%;
+    }
+
+    .detail-image {
+        width: 100%;
+
+        height: 200px;
+    }
+
+    .compare-container {
+        padding: 0 12px;
+    }
+
+    .compare-table {
+        min-width: 700px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+        padding: 14px;
+    }
+
+    .compare-university h2 {
+        font-size: 16px;
+    }
+
+    .detail-hero {
+        height: 300px;
+
+        border-radius: 20px;
+    }
+
+    .detail-hero > div:last-child {
+        padding: 70px 24px 22px;
+    }
+
+    .detail-hero > div:last-child h1 {
+        font-size: 30px;
+    }
+
+    .account-item {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .account-item strong {
+        text-align: left;
+    }
+}
+
+
+/* ========================================
+   700px
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .university-card {
+        grid-template-columns: 1fr;
+    }
+
+    .university-card-main {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .university-icon {
+        width: 100%;
+
+        height: 200px;
+    }
+
+    .university-card-actions {
+        flex-direction: row;
+
+        width: 100%;
+    }
+
+    .university-card-actions button {
+        flex: 1;
+
+        width: 100%;
+    }
+
+    .filter-box {
+        flex-direction: column;
+    }
+
+    .university-header h1 {
+        font-size: 34px;
+    }
+
+    .compare-page-header h1 {
+        font-size: 32px;
+    }
+
+    .career-header h1 {
+        font-size: 32px;
+    }
+
+    .career-recommend-list {
+        grid-template-columns: 1fr;
+    }
+
+    .career-university-list {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-image {
+        width: 100%;
+
+        height: 200px;
+    }
+
+    .favorite-item {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .favorite-actions {
+        width: 100%;
+    }
+
+    .favorite-actions .detail-button {
+        flex: 1;
+    }
+
+    .forum-section,
+    #postDetailSection {
+        padding: 22px;
+
+        border-radius: 18px;
+    }
+
+    .forum-header {
+        margin-bottom: 25px;
+    }
+
+    .forum-header h2 {
+        font-size: 30px;
+    }
+
+    .forum-section h3 {
+        font-size: 20px;
+    }
+
+    #postDetailSection h3 {
+        font-size: 23px;
+    }
+
+    #createPostForm button,
+    #replyForm button {
+        width: 100%;
+    }
+}
+
+
+/* ========================================
+   600px
+   ======================================== */
+
+@media (max-width: 600px) {
+
+    main > section:has(#registerForm),
+    main > section:has(#loginForm) {
+
+        margin: 25px 15px;
+
+        padding: 25px 18px;
+    }
+
+    #registerForm,
+    #loginForm {
+        padding: 20px;
+    }
+
+    #accountSection {
+
+        margin: 25px 15px;
+
+        padding: 25px 18px;
+
+        border-radius: 18px;
+    }
+
+    .account-card {
+        padding: 20px;
+    }
+
+    .account-actions {
+        flex-direction: column;
+    }
+
+    .account-actions button,
+    #loginRequired button {
+        width: 100%;
+    }
+
+    header nav {
+        background:
+            var(--sentang-blue-dark);
+    }
+}
+
+
+/* ========================================
+   500px
+   ======================================== */
+
+@media (max-width: 500px) {
+
+    .detail-hero {
+        height: 280px;
+
+        border-radius: 18px;
+    }
+
+    .detail-hero > div:last-child {
+        padding: 60px 20px 20px;
+    }
+
+    .detail-hero > div:last-child h1 {
+        font-size: 27px;
+    }
+
+    .detail-hero > div:last-child .subtitle {
+        font-size: 12px;
+    }
+
+    .forum-header h2 {
+        font-size: 27px;
+    }
+
+    .forum-section,
+    #postDetailSection {
+        padding: 18px;
+    }
+
+    .forum-post {
+        padding: 18px;
+    }
+
+    .forum-post h4 {
+        font-size: 17px;
+    }
+
+    #postDetailSection h3 {
+        font-size: 21px;
+    }
+}
