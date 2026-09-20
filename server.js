@@ -1336,24 +1336,71 @@ app.get(
     }
 );
 
+// DELETE /api/forum/:id
+app.delete(
+    "/api/forum/:id",
+    requireAuth,
+    (req, res) => {
+        const id =
+            Number(req.params.id);
+
+        const postIndex =
+            forumPosts.findIndex(
+                item => item.id === id
+            );
+
+        if (postIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "ไม่พบกระทู้นี้"
+            });
+        }
+
+        const post =
+            forumPosts[postIndex];
+
+        if (
+            post.userId !==
+            req.user.id
+        ) {
+            return res.status(403).json({
+                success: false,
+                message:
+                    "คุณไม่มีสิทธิ์ลบกระทู้นี้"
+            });
+        }
+
+        forumPosts.splice(
+            postIndex,
+            1
+        );
+
+        res.json({
+            success: true,
+            message:
+                "ลบกระทู้สำเร็จ"
+        });
+    }
+);
+
 
 // POST /api/forum
 app.post(
     "/api/forum",
+    requireAuth,
     (req, res) => {
 
         const {
-            title,
-            content,
-            author
-        } = req.body;
+    title,
+    content
+} = req.body;
 
 
-        if (
-            !title ||
-            !content ||
-            !author
-        ) {
+       if (
+    !title ||
+    !content
+) {
 
             return res.status(400).json({
 
@@ -1367,8 +1414,7 @@ app.post(
         }
 
 
-        const user =
-            getUserFromRequest(req);
+      
 
 
         const newPost = {
@@ -1383,10 +1429,10 @@ app.post(
                 String(content).trim(),
 
             author:
-                String(author).trim(),
+    req.user.displayName,
 
-            userId:
-                user ? user.id : null,
+userId:
+    req.user.id,
 
             createdAt:
                 new Date().toISOString(),
@@ -1418,6 +1464,7 @@ app.post(
 // POST /api/forum/:id/replies
 app.post(
     "/api/forum/:id/replies",
+    requireAuth,
     (req, res) => {
 
         const id =
@@ -1444,52 +1491,29 @@ app.post(
         }
 
 
-        const {
-            content,
-            author
-        } = req.body;
+      const {
+    content
+} = req.body;
+
+if (!content) {
+    return res.status(400).json({
+        success: false,
+        message:
+            "กรุณากรอกความคิดเห็นให้ครบ"
+    });
+}
 
 
-        if (
-            !content ||
-            !author
-        ) {
-
-            return res.status(400).json({
-
-                success: false,
-
-                message:
-                    "กรุณากรอกความคิดเห็นให้ครบ"
-
-            });
-
-        }
+    
 
 
-        const user =
-            getUserFromRequest(req);
-
-
-        const newReply = {
-
-            id:
-                nextReplyId++,
-
-            content:
-                String(content).trim(),
-
-            author:
-                String(author).trim(),
-
-            userId:
-                user ? user.id : null,
-
-            createdAt:
-                new Date().toISOString()
-
-        };
-
+       const newReply = {
+    id: nextReplyId++,
+    content: String(content).trim(),
+    author: req.user.displayName,
+    userId: req.user.id,
+    createdAt: new Date().toISOString()
+};
 
         post.replies.push(
             newReply
@@ -1567,17 +1591,14 @@ app.get(
 
                 ],
 
-                forum: [
-
+               forum: [
                     "GET /api/forum",
-
-                    "GET /api/forum/:id",
-
+                     "GET /api/forum/:id",
                     "POST /api/forum",
-
-                    "POST /api/forum/:id/replies"
-
-                ]
+                    "POST /api/forum/:id/replies",
+                     "DELETE /api/forum/:id"
+]
+                
 
             }
 

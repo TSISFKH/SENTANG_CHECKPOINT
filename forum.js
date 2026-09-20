@@ -4,10 +4,19 @@
 // ========================================
 
 // ========================================
+// API
+// ========================================
+
+const API_URL =
+    "https://sentang-checkpoint-api.onrender.com";
+
+
+// ========================================
 // DOM
 // ========================================
 
-const forumList = document.getElementById("forumList");
+const forumList =
+    document.getElementById("forumList");
 
 const createPostForm =
     document.getElementById("createPostForm");
@@ -63,6 +72,137 @@ const replyMessage =
 
 let currentPostId = null;
 
+let currentUser = null;
+
+
+// ========================================
+// ดึง Token
+// ========================================
+
+function getToken() {
+
+    return localStorage.getItem(
+        "sentangToken"
+    );
+
+}
+
+
+// ========================================
+// ตรวจสอบ Login
+// ========================================
+
+async function checkLogin() {
+
+    const token =
+        getToken();
+
+    if (!token) {
+
+        currentUser = null;
+
+        return null;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/auth/me`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            localStorage.removeItem(
+                "sentangToken"
+            );
+
+            localStorage.removeItem(
+                "sentangUser"
+            );
+
+            currentUser = null;
+
+            return null;
+
+        }
+
+
+        currentUser =
+            result.user;
+
+
+        localStorage.setItem(
+            "sentangUser",
+            JSON.stringify(result.user)
+        );
+
+
+        return currentUser;
+
+
+    } catch (error) {
+
+        console.error(
+            "Auth Error:",
+            error
+        );
+
+        currentUser = null;
+
+        return null;
+
+    }
+
+}
+
+
+// ========================================
+// บังคับ Login ก่อนใช้งาน
+// ========================================
+
+async function requireLogin() {
+
+    const user =
+        await checkLogin();
+
+
+    if (!user) {
+
+        alert(
+            "กรุณาเข้าสู่ระบบก่อนใช้งาน"
+        );
+
+        window.location.href =
+            "login.html";
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
 
 // ========================================
 // แปลงวันที่
@@ -74,12 +214,16 @@ function formatDate(dateString) {
         return "";
     }
 
-    const date = new Date(dateString);
+    const date =
+        new Date(dateString);
 
-    return date.toLocaleString("th-TH", {
-        dateStyle: "medium",
-        timeStyle: "short"
-    });
+    return date.toLocaleString(
+        "th-TH",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
 
 }
 
@@ -95,32 +239,50 @@ async function loadPosts() {
         forumList.innerHTML =
             "<p>กำลังโหลดกระทู้...</p>";
 
+
+        await checkLogin();
+
+
         const response =
             await fetch(
-                "https://sentang-checkpoint-api.onrender.com/api/forum"
+                `${API_URL}/api/forum`
             );
 
+
         if (!response.ok) {
-            throw new Error("ไม่สามารถโหลดกระทู้ได้");
+
+            throw new Error(
+                "ไม่สามารถโหลดกระทู้ได้"
+            );
+
         }
+
 
         const result =
             await response.json();
 
+
         if (!result.success) {
+
             throw new Error(
-                result.message || "ไม่สามารถโหลดกระทู้ได้"
+                result.message ||
+                "ไม่สามารถโหลดกระทู้ได้"
             );
+
         }
+
 
         const posts =
             result.results || [];
 
+
         renderPosts(posts);
+
 
     } catch (error) {
 
         console.error(error);
+
 
         forumList.innerHTML = `
             <p>
@@ -149,6 +311,7 @@ function renderPosts(posts) {
         `;
 
         return;
+
     }
 
 
@@ -160,7 +323,15 @@ function renderPosts(posts) {
         const postElement =
             document.createElement("article");
 
-        postElement.className = "forum-post";
+
+        postElement.className =
+            "forum-post";
+
+
+        const isOwner =
+            currentUser &&
+            Number(post.userId) ===
+            Number(currentUser.id);
 
 
         postElement.innerHTML = `
@@ -184,7 +355,9 @@ function renderPosts(posts) {
 
             <p>
                 ความคิดเห็น:
-                ${post.replies ? post.replies.length : 0}
+                ${post.replies
+                    ? post.replies.length
+                    : 0}
             </p>
 
             <button
@@ -194,10 +367,26 @@ function renderPosts(posts) {
                 ดูกระทู้
             </button>
 
+            ${
+                isOwner
+                ? `
+                    <button
+                        type="button"
+                        class="delete-post-button"
+                        onclick="deletePost(${post.id})"
+                    >
+                        🗑️ ลบกระทู้
+                    </button>
+                  `
+                : ""
+            }
+
         `;
 
 
-        forumList.appendChild(postElement);
+        forumList.appendChild(
+            postElement
+        );
 
     });
 
@@ -214,29 +403,46 @@ async function openPost(id) {
 
         const response =
             await fetch(
-                `https://sentang-checkpoint-api.onrender.com/api/forum/${id}`
+                `${API_URL}/api/forum/${id}`
             );
 
+
         if (!response.ok) {
-            throw new Error("ไม่พบกระทู้นี้");
+
+            throw new Error(
+                "ไม่พบกระทู้นี้"
+            );
+
         }
+
 
         const result =
             await response.json();
 
+
         if (!result.success) {
+
             throw new Error(
-                result.message || "ไม่สามารถโหลดกระทู้ได้"
+                result.message ||
+                "ไม่สามารถโหลดกระทู้ได้"
             );
+
         }
 
-        currentPostId = id;
 
-        displayPost(result.data);
+        currentPostId =
+            id;
+
+
+        displayPost(
+            result.data
+        );
+
 
     } catch (error) {
 
         console.error(error);
+
 
         alert(
             error.message ||
@@ -254,17 +460,21 @@ async function openPost(id) {
 
 function displayPost(post) {
 
-    postDetailSection.hidden = false;
+    postDetailSection.hidden =
+        false;
 
 
     detailTitle.textContent =
         post.title;
 
+
     detailAuthor.textContent =
         `ผู้โพสต์: ${post.author}`;
 
+
     detailDate.textContent =
         formatDate(post.createdAt);
+
 
     detailContent.textContent =
         post.content;
@@ -275,9 +485,66 @@ function displayPost(post) {
     );
 
 
-    postDetailSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    // ========================================
+    // ปุ่มลบกระทู้ในรายละเอียด
+    // ========================================
+
+    const existingDeleteButton =
+        document.getElementById(
+            "deleteCurrentPostButton"
+        );
+
+
+    if (existingDeleteButton) {
+
+        existingDeleteButton.remove();
+
+    }
+
+
+    const isOwner =
+        currentUser &&
+        Number(post.userId) ===
+        Number(currentUser.id);
+
+
+    if (isOwner) {
+
+        const deleteButton =
+            document.createElement("button");
+
+
+        deleteButton.id =
+            "deleteCurrentPostButton";
+
+
+        deleteButton.type =
+            "button";
+
+
+        deleteButton.className =
+            "delete-post-button";
+
+
+        deleteButton.textContent =
+            "🗑️ ลบกระทู้นี้";
+
+
+        deleteButton.addEventListener(
+            "click",
+            () => {
+                deletePost(post.id);
+            }
+        );
+
+    postDetailSection.appendChild(
+        deleteButton
+    );
+}
+
+postDetailSection.scrollIntoView({
+    behavior: "smooth"
+});
 
 }
 
@@ -288,7 +555,10 @@ function displayPost(post) {
 
 function renderReplies(replies) {
 
-    if (!replies || replies.length === 0) {
+    if (
+        !replies ||
+        replies.length === 0
+    ) {
 
         replyList.innerHTML = `
             <p>
@@ -297,6 +567,7 @@ function renderReplies(replies) {
         `;
 
         return;
+
     }
 
 
@@ -307,6 +578,7 @@ function renderReplies(replies) {
 
         const replyElement =
             document.createElement("div");
+
 
         replyElement.className =
             "forum-reply";
@@ -319,7 +591,8 @@ function renderReplies(replies) {
             </p>
 
             <p>
-                โดย ${escapeHTML(reply.author)}
+                โดย
+                ${escapeHTML(reply.author)}
             </p>
 
             <p>
@@ -342,196 +615,359 @@ function renderReplies(replies) {
 // สร้างกระทู้
 // ========================================
 
-createPostForm.addEventListener(
-    "submit",
-    async function (event) {
+if (createPostForm) {
 
-        event.preventDefault();
+    createPostForm.addEventListener(
+        "submit",
+        async function (event) {
 
-
-        createPostMessage.textContent =
-            "กำลังสร้างกระทู้...";
+            event.preventDefault();
 
 
-        const data = {
+            // ========================================
+            // ตรวจสอบ Login ก่อน
+            // ========================================
 
-            title:
-                postTitle.value.trim(),
-
-            content:
-                postContent.value.trim(),
-
-            author:
-                postAuthor.value.trim()
-
-        };
+            const user =
+                await requireLogin();
 
 
-        try {
-
-            const response =
-                await fetch(
-                    "https://sentang-checkpoint-api.onrender.com/api/forum",
-                    {
-
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(data)
-
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            if (!response.ok ||
-                !result.success) {
-
-                throw new Error(
-                    result.message ||
-                    "ไม่สามารถสร้างกระทู้ได้"
-                );
-
+            if (!user) {
+                return;
             }
 
 
             createPostMessage.textContent =
-                "สร้างกระทู้สำเร็จ";
+                "กำลังสร้างกระทู้...";
 
 
-            createPostForm.reset();
+            const data = {
+
+                title:
+                    postTitle.value.trim(),
+
+                content:
+                    postContent.value.trim()
+
+            };
 
 
-            await loadPosts();
+            try {
+
+                const token =
+                    getToken();
 
 
-            openPost(
-                result.data.id
-            );
+                const response =
+                    await fetch(
+                        `${API_URL}/api/forum`,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            },
+
+                            body:
+                                JSON.stringify(data)
+
+                        }
+                    );
 
 
-        } catch (error) {
+                const result =
+                    await response.json();
 
-            console.error(error);
 
-            createPostMessage.textContent =
-                error.message ||
-                "ไม่สามารถสร้างกระทู้ได้";
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "ไม่สามารถสร้างกระทู้ได้"
+                    );
+
+                }
+
+
+                createPostMessage.textContent =
+                    "สร้างกระทู้สำเร็จ";
+
+
+                createPostForm.reset();
+
+
+                if (postAuthor) {
+
+                    postAuthor.value =
+                        user.displayName || "";
+
+                }
+
+
+                await loadPosts();
+
+
+                await openPost(
+                    result.data.id
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                createPostMessage.textContent =
+                    error.message ||
+                    "ไม่สามารถสร้างกระทู้ได้";
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
 // ========================================
 // แสดงความคิดเห็น
 // ========================================
 
-replyForm.addEventListener(
-    "submit",
-    async function (event) {
+if (replyForm) {
 
-        event.preventDefault();
+    replyForm.addEventListener(
+        "submit",
+        async function (event) {
 
-
-        if (!currentPostId) {
-
-            replyMessage.textContent =
-                "กรุณาเลือกกระทู้ก่อน";
-
-            return;
-        }
+            event.preventDefault();
 
 
-        replyMessage.textContent =
-            "กำลังส่งความคิดเห็น...";
+            if (!currentPostId) {
 
+                replyMessage.textContent =
+                    "กรุณาเลือกกระทู้ก่อน";
 
-        const data = {
-
-            content:
-                replyContent.value.trim(),
-
-            author:
-                replyAuthor.value.trim()
-
-        };
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `https://sentang-checkpoint-api.onrender.com/api/forum/${currentPostId}/replies`,
-                    {
-
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(data)
-
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            if (!response.ok ||
-                !result.success) {
-
-                throw new Error(
-                    result.message ||
-                    "ไม่สามารถเพิ่มความคิดเห็นได้"
-                );
+                return;
 
             }
 
 
+            // ========================================
+            // ตรวจสอบ Login
+            // ========================================
+
+            const user =
+                await requireLogin();
+
+
+            if (!user) {
+                return;
+            }
+
+
             replyMessage.textContent =
-                "เพิ่มความคิดเห็นสำเร็จ";
+                "กำลังส่งความคิดเห็น...";
 
 
-            replyForm.reset();
+            const data = {
+
+                content:
+                    replyContent.value.trim()
+
+            };
 
 
-            // โหลดกระทู้ล่าสุด
-            await openPost(
-                currentPostId
+            try {
+
+                const token =
+                    getToken();
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/forum/${currentPostId}/replies`,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            },
+
+                            body:
+                                JSON.stringify(data)
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "ไม่สามารถเพิ่มความคิดเห็นได้"
+                    );
+
+                }
+
+
+                replyMessage.textContent =
+                    "เพิ่มความคิดเห็นสำเร็จ";
+
+
+                replyForm.reset();
+
+
+                await openPost(
+                    currentPostId
+                );
+
+
+                await loadPosts();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                replyMessage.textContent =
+                    error.message ||
+                    "ไม่สามารถเพิ่มความคิดเห็นได้";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ========================================
+// ลบกระทู้
+// ========================================
+
+async function deletePost(id) {
+
+    const user =
+        await requireLogin();
+
+
+    if (!user) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "คุณต้องการลบกระทู้นี้ใช่หรือไม่?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const token =
+            getToken();
+
+
+        const response =
+            await fetch(
+                `${API_URL}/api/forum/${id}`,
+                {
+
+                    method: "DELETE",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    }
+
+                }
             );
 
 
-            // โหลดรายการกระทู้ใหม่
-            await loadPosts();
+        const result =
+            await response.json();
 
 
-        } catch (error) {
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
-            console.error(error);
-
-            replyMessage.textContent =
-                error.message ||
-                "ไม่สามารถเพิ่มความคิดเห็นได้";
+            throw new Error(
+                result.message ||
+                "ไม่สามารถลบกระทู้ได้"
+            );
 
         }
 
+
+        alert(
+            "ลบกระทู้สำเร็จ"
+        );
+
+
+        if (
+            Number(currentPostId) ===
+            Number(id)
+        ) {
+
+            currentPostId =
+                null;
+
+            postDetailSection.hidden =
+                true;
+
+        }
+
+
+        await loadPosts();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            error.message ||
+            "ไม่สามารถลบกระทู้ได้"
+        );
+
     }
-);
+
+}
 
 
 // ========================================
@@ -543,8 +979,10 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
+
     div.textContent =
         text ?? "";
+
 
     return div.innerHTML;
 
@@ -555,4 +993,13 @@ function escapeHTML(text) {
 // เริ่มต้น
 // ========================================
 
-loadPosts();
+async function initializeForum() {
+    try {
+        await checkLogin();
+        await loadPosts();
+    } catch (error) {
+        console.error("Forum initialization error:", error);
+    }
+}
+
+initializeForum();
