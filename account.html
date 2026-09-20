@@ -98,18 +98,68 @@
                 </h3>
 
 
-                <div class="account-item">
+               <div class="account-item">
 
-                    <span class="account-label">
-                        ชื่อที่อยากให้เห็น
-                    </span>
+    <span class="account-label">
+        ชื่อที่แสดง
+    </span>
 
-                    <strong id="displayName">
-                        -
-                    </strong>
+    <strong id="displayName">
+        -
+    </strong>
 
-                </div>
+</div>
 
+
+<div class="account-actions">
+
+    <button
+        type="button"
+        id="editDisplayNameButton"
+    >
+        ✏️ เปลี่ยนชื่อ
+    </button>
+
+</div>
+
+
+<div
+    id="displayNameEditor"
+    hidden
+>
+
+    <label for="newDisplayName">
+        ชื่อใหม่
+    </label>
+
+    <input
+        type="text"
+        id="newDisplayName"
+        maxlength="30"
+        placeholder="กรอกชื่อที่ต้องการใช้แสดง"
+    >
+
+    <div class="account-actions">
+
+        <button
+            type="button"
+            id="saveDisplayNameButton"
+        >
+            บันทึกชื่อ
+        </button>
+
+        <button
+            type="button"
+            id="cancelDisplayNameButton"
+        >
+            ยกเลิก
+        </button>
+
+    </div>
+
+    <p id="displayNameStatus"></p>
+
+</div>
 
                 <div class="account-item">
 
