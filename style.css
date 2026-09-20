@@ -580,47 +580,32 @@ select:focus {
 
 .answer-button {
     display: block;
-
     width: 100%;
-
     padding: 18px;
-
     margin: 12px 0;
 
-    background: white;
+    background: #FFFFFF;
+    color: #1F2937 !important;
 
-    border:
-        2px solid var(--sentang-border);
-
+    border: 2px solid var(--sentang-border);
     border-radius: 14px;
 
     text-align: left;
-
     font-size: 16px;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
 .answer-button:hover {
-    border-color:
-        var(--sentang-blue);
-
-    background:
-        var(--sentang-blue-light);
+    border-color: var(--sentang-blue);
+    background: var(--sentang-blue-light);
+    color: #1F2937 !important;
 }
 
 .answer-button.selected {
-    border-color:
-        var(--sentang-orange);
-
-    background:
-        var(--sentang-orange-light);
-
-    color:
-        var(--sentang-orange-dark);
-
+    border-color: var(--sentang-orange);
+    background: var(--sentang-orange-light);
+    color: var(--sentang-orange-dark) !important;
     font-weight: bold;
 }
 
@@ -3882,12 +3867,20 @@ hr {
     }
 }
 /* ========================================
-   Quiz Choice Text
+   Quiz Answer Text
 ======================================== */
-.answer-button {
-    color: var(--sentang-text);
+
+.quiz-container #answers .answer-button {
+    color: #1F2937 !important;
+    opacity: 1 !important;
 }
 
-.answer-button.selected {
-    color: var(--sentang-orange-dark);
+.quiz-container #answers .answer-button.selected {
+    color: #D96F0B !important;
+    opacity: 1 !important;
+}
+
+.quiz-container #answers .answer-button:hover {
+    color: #1F2937 !important;
+    opacity: 1 !important;
 }
