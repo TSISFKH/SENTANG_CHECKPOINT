@@ -3881,3 +3881,13 @@ hr {
         font-size: 21px;
     }
 }
+/* ========================================
+   Quiz Choice Text
+======================================== */
+.answer-button {
+    color: var(--sentang-text);
+}
+
+.answer-button.selected {
+    color: var(--sentang-orange-dark);
+}
