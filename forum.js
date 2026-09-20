@@ -96,7 +96,9 @@ async function loadPosts() {
             "<p>กำลังโหลดกระทู้...</p>";
 
         const response =
-            await fetch("/api/forum");
+            await fetch(
+                "https://sentang-checkpoint-api.onrender.com/api/forum"
+            );
 
         if (!response.ok) {
             throw new Error("ไม่สามารถโหลดกระทู้ได้");
@@ -211,7 +213,9 @@ async function openPost(id) {
     try {
 
         const response =
-            await fetch(`/api/forum/${id}`);
+            await fetch(
+                `https://sentang-checkpoint-api.onrender.com/api/forum/${id}`
+            );
 
         if (!response.ok) {
             throw new Error("ไม่พบกระทู้นี้");
@@ -366,19 +370,22 @@ createPostForm.addEventListener(
         try {
 
             const response =
-                await fetch("/api/forum", {
+                await fetch(
+                    "https://sentang-checkpoint-api.onrender.com/api/forum",
+                    {
 
-                    method: "POST",
+                        method: "POST",
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
 
-                    body:
-                        JSON.stringify(data)
+                        body:
+                            JSON.stringify(data)
 
-                });
+                    }
+                );
 
 
             const result =
@@ -464,7 +471,7 @@ replyForm.addEventListener(
 
             const response =
                 await fetch(
-                    `/api/forum/${currentPostId}/replies`,
+                    `https://sentang-checkpoint-api.onrender.com/api/forum/${currentPostId}/replies`,
                     {
 
                         method: "POST",

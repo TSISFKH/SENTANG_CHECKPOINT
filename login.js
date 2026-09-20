@@ -41,7 +41,7 @@ loginForm.addEventListener(
 
             const response =
                 await fetch(
-                    "/api/auth/login",
+                    "https://sentang-checkpoint-api.onrender.com/api/auth/login",
                     {
 
                         method: "POST",

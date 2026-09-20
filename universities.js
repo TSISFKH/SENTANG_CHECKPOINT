@@ -575,7 +575,7 @@ async function loadUniversities() {
 
         const response =
             await fetch(
-                "/api/universities"
+                "https://sentang-checkpoint-api.onrender.com/api/universities"
             );
 
         if (!response.ok) {

@@ -137,7 +137,7 @@ registerForm.addEventListener(
 
             const response =
                 await fetch(
-                    "/api/auth/register",
+                    "https://sentang-checkpoint-api.onrender.com/api/auth/register",
                     {
 
                         method: "POST",

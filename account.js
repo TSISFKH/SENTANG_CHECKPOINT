@@ -79,7 +79,7 @@ async function loadAccount() {
 
         const response =
             await fetch(
-                "/api/auth/me",
+                "https://sentang-checkpoint-api.onrender.com/api/auth/me",
                 {
 
                     method: "GET",
@@ -194,7 +194,7 @@ logoutButton.addEventListener(
             if (token) {
 
                 await fetch(
-                    "/api/auth/logout",
+                    "https://sentang-checkpoint-api.onrender.com/api/auth/logout",
                     {
 
                         method: "POST",

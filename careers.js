@@ -228,7 +228,7 @@ async function loadCareers() {
 
         const response =
             await fetch(
-                "/api/careers"
+                "https://sentang-checkpoint-api.onrender.com/api/careers"
             );
 
 

@@ -74,7 +74,7 @@ async function loadCareer() {
 
         const response =
             await fetch(
-                "/api/careers/" +
+                "https://sentang-checkpoint-api.onrender.com/api/careers/" +
                 encodeURIComponent(
                     selectedCareer
                 )

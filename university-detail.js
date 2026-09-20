@@ -426,7 +426,7 @@ async function loadUniversity() {
 
         const response =
             await fetch(
-                "/api/universities/" +
+                "https://sentang-checkpoint-api.onrender.com/api/universities/" +
                 encodeURIComponent(
                     selectedUniversity
                 )
