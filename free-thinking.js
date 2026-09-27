@@ -5,10 +5,18 @@
 
 
 /* =====================================
+   API
+===================================== */
+
+const API_BASE_URL =
+    "https://sentang-checkpoint-api.onrender.com";
+
+
+/* =====================================
    วิเคราะห์ Free Thinking
 ===================================== */
 
-function analyzeThinking() {
+async function analyzeThinking() {
 
     const input =
         document.getElementById(
@@ -32,7 +40,7 @@ function analyzeThinking() {
 
 
     /* =====================================
-       เก็บข้อความ
+       เก็บข้อความที่ผู้ใช้เขียน
     ===================================== */
 
     localStorage.setItem(
@@ -40,15 +48,12 @@ function analyzeThinking() {
         input
     );
 
-
-    const text =
-        input.toLowerCase();
-
-
+    
     /* =====================================
        คะแนนจากแบบทดสอบ
        
-       ถ้าไม่มี = เริ่ม Free Thinking โดยตรง
+       ถ้าไม่มี = วิเคราะห์ Free Thinking
+       โดยใช้ข้อความอย่างเดียว
     ===================================== */
 
     let quizScores = null;
@@ -86,296 +91,205 @@ function analyzeThinking() {
 
 
     /* =====================================
-       คำสำคัญ
+       แสดงสถานะกำลังวิเคราะห์
     ===================================== */
 
-    const keywords = {
-
-        science: [
-
-            "ทดลอง",
-            "วิจัย",
-            "วิทยาศาสตร์",
-            "ชีววิทยา",
-            "เคมี",
-            "ฟิสิกส์",
-            "ห้องทดลอง",
-            "นักวิจัย",
-            "ค้นคว้า",
-            "ค้นพบ",
-            "การแพทย์",
-            "แพทย์",
-            "ยา"
-
-        ],
-
-
-        technology: [
-
-            "คอม",
-            "คอมพิวเตอร์",
-            "โปรแกรม",
-            "เขียนโค้ด",
-            "โค้ด",
-            "เทคโนโลยี",
-            "ai",
-            "ปัญญาประดิษฐ์",
-            "ซอฟต์แวร์",
-            "เกม",
-            "แอป",
-            "เว็บไซต์",
-            "ระบบ"
-
-        ],
-
-
-        business: [
-
-            "ธุรกิจ",
-            "บริษัท",
-            "การตลาด",
-            "ขาย",
-            "ผู้ประกอบการ",
-            "บริหาร",
-            "วางแผน",
-            "การเงิน",
-            "ลงทุน",
-            "ร้าน",
-            "แบรนด์"
-
-        ],
-
-
-        social: [
-
-            "คน",
-            "ผู้คน",
-            "สังคม",
-            "ช่วยเหลือ",
-            "ครู",
-            "เด็ก",
-            "กฎหมาย",
-            "ชุมชน",
-            "สื่อสาร",
-            "ให้คำปรึกษา",
-            "ผู้ป่วย"
-
-        ],
-
-
-        creative: [
-
-            "วาด",
-            "ออกแบบ",
-            "ศิลปะ",
-            "สร้างสรรค์",
-            "ดีไซน์",
-            "กราฟิก",
-            "ภาพ",
-            "เขียน",
-            "ถ่ายรูป",
-            "ดนตรี",
-            "แฟชั่น",
-            "คอนเทนต์"
-
-        ]
-
-    };
-
-
-    /* =====================================
-       วิเคราะห์คำสำคัญ
-    ===================================== */
-
-    const keywordScores = {
-
-        science: 0,
-        technology: 0,
-        business: 0,
-        social: 0,
-        creative: 0
-
-    };
-
-
-    for (
-        const type in keywords
-    ) {
-
-        keywords[type].forEach(
-            function(keyword) {
-
-                if (
-                    text.includes(keyword)
-                ) {
-
-                    keywordScores[type]++;
-
-                }
-
-            }
+    const button =
+        document.querySelector(
+            "button"
         );
 
-    }
 
+    if (button) {
 
-    /* =====================================
-       สร้างคะแนนเริ่มต้น
-    ===================================== */
+        button.disabled = true;
 
-    const finalScores = {
-
-        science: 0,
-        technology: 0,
-        business: 0,
-        social: 0,
-        creative: 0
-
-    };
-
-
-    /* =====================================
-       ถ้ามีคะแนนจากแบบทดสอบ
-       ให้นำมารวม
-    ===================================== */
-
-    if (quizScores) {
-
-        finalScores.science +=
-            quizScores.science || 0;
-
-        finalScores.technology +=
-            quizScores.technology || 0;
-
-        finalScores.business +=
-            quizScores.business || 0;
-
-        finalScores.social +=
-            quizScores.social || 0;
-
-        finalScores.creative +=
-            quizScores.creative || 0;
+        button.textContent =
+            "กำลังวิเคราะห์...";
 
     }
 
 
-    /* =====================================
-       เพิ่มคะแนนจาก Free Thinking
-    ===================================== */
+    try {
 
-    finalScores.science +=
-        keywordScores.science;
+        /* =====================================
+           ส่งข้อความไปให้ Gemini ผ่าน Backend
+        ===================================== */
 
-    finalScores.technology +=
-        keywordScores.technology;
+        const response =
+            await fetch(
+                `${API_BASE_URL}/api/free-thinking`,
+                {
 
-    finalScores.business +=
-        keywordScores.business;
+                    method: "POST",
 
-    finalScores.social +=
-        keywordScores.social;
+                    headers: {
 
-    finalScores.creative +=
-        keywordScores.creative;
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        text: input,
+
+                        quizScores:
+                            quizScores
+
+                    })
+
+                }
+            );
 
 
-    /* =====================================
-       หาคะแนนสูงสุด
-    ===================================== */
+        /* =====================================
+           อ่านผลลัพธ์
+        ===================================== */
 
-    const highestScore =
-        Math.max(
-            ...Object.values(
-                finalScores
+        const data =
+            await response.json();
+
+
+        /* =====================================
+           ตรวจสอบว่า Backend ทำงานหรือไม่
+        ===================================== */
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "ไม่สามารถวิเคราะห์ข้อความได้"
+            );
+
+        }
+
+
+        /* =====================================
+           ตรวจสอบผลจาก Gemini
+        ===================================== */
+
+        if (
+            !data.result
+        ) {
+
+            throw new Error(
+                "ไม่พบผลการวิเคราะห์จาก AI"
+            );
+
+        }
+
+
+        /* =====================================
+           เก็บผลการวิเคราะห์จาก Gemini
+        ===================================== */
+
+        localStorage.setItem(
+            "freeThinkingAIResult",
+            JSON.stringify(
+                data.result
             )
         );
 
 
-    const highestTypes =
-        Object.keys(
-            finalScores
-        ).filter(
-            type =>
-                finalScores[type]
-                === highestScore
-        );
-
-
-    /* =====================================
-       ไม่มีข้อมูลเพียงพอ
-    ===================================== */
-
-    if (
-        highestScore === 0
-    ) {
+        /* =====================================
+           เก็บคะแนนแบบทดสอบ
+        ===================================== */
 
         localStorage.setItem(
-            "freeThinkingResult",
-            "unknown"
+            "freeThinkingScores",
+            JSON.stringify(
+                data.quizScores || {}
+            )
         );
+
+
+        /* =====================================
+           บันทึกโหมด
+        ===================================== */
+
+        localStorage.setItem(
+            "freeThinkingMode",
+            quizScores
+                ? "combined"
+                : "direct"
+        );
+
+
+        /* =====================================
+           เก็บผลลัพธ์หลัก
+           
+           ใช้สำหรับระบบเดิมที่อาจยังอ่าน
+           freeThinkingResult อยู่
+        ===================================== */
+
+        const areas =
+            Array.isArray(
+                data.result.areas
+            )
+                ? data.result.areas
+                : [];
+
+
+        if (areas.length > 0) {
+
+            localStorage.setItem(
+                "freeThinkingResult",
+                areas[0]
+            );
+
+        }
+
+        else {
+
+            localStorage.setItem(
+                "freeThinkingResult",
+                "unknown"
+            );
+
+        }
+
+
+        /* =====================================
+           ไปหน้าผลลัพธ์
+        ===================================== */
+
+        window.location.href =
+            "free-thinking-result.html";
+
 
     }
 
+    catch (error) {
 
-    /* =====================================
-       คะแนนเสมอ
-    ===================================== */
-
-    else if (
-        highestTypes.length > 1
-    ) {
-
-        localStorage.setItem(
-            "freeThinkingResult",
-            "unclear"
+        console.error(
+            "Free Thinking Error:",
+            error
         );
 
-    }
 
-
-    /* =====================================
-       มีสายที่ชัดเจน
-    ===================================== */
-
-    else {
-
-        localStorage.setItem(
-            "freeThinkingResult",
-            highestTypes[0]
+        alert(
+            "ไม่สามารถวิเคราะห์ได้ในขณะนี้\n\n" +
+            "กรุณาลองใหม่อีกครั้ง"
         );
 
+
+        /* =====================================
+           คืนค่าปุ่ม
+        ===================================== */
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "วิเคราะห์";
+
+        }
+
     }
-
-
-    /* =====================================
-       เก็บคะแนนรวม
-    ===================================== */
-
-    localStorage.setItem(
-        "freeThinkingScores",
-        JSON.stringify(
-            finalScores
-        )
-    );
-
-
-    /* =====================================
-       บันทึกว่าใช้คะแนนแบบทดสอบหรือไม่
-    ===================================== */
-
-    localStorage.setItem(
-        "freeThinkingMode",
-        quizScores
-            ? "combined"
-            : "direct"
-    );
-
-
-    /* =====================================
-       ไปหน้าผลลัพธ์
-    ===================================== */
-
-    window.location.href =
-        "free-thinking-result.html";
 
 }
