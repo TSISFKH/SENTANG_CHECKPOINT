@@ -6,6 +6,7 @@
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
+const { GoogleGenAI, Type } = require("@google/genai");
 
 const {
     universityData,
@@ -38,6 +39,14 @@ app.use(express.json());
 
 app.use(express.static(__dirname));
 
+// ========================================
+// Gemini AI
+// ========================================
+
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
+});
+
 
 // ========================================
 // ตัวแปรระบบผู้ใช้
@@ -50,6 +59,7 @@ let users = [];
 let sessions = new Map();
 
 let nextUserId = 1;
+
 
 
 // ========================================
@@ -479,32 +489,29 @@ app.post(
             // สร้าง User
             // ========================================
 
-            const newUser = {
+           const newUser = {
+    id:
+        nextUserId++,
+    email:
+        cleanEmail,
+    username:
+        cleanUsername,
+    displayName:
+        cleanDisplayName,
 
-                id:
-                    nextUserId++,
+    // เวลาที่เปลี่ยนชื่อครั้งล่าสุด
+    // null = ยังไม่เคยเปลี่ยน
+    displayNameChangedAt:
+        null,
 
-                email:
-                    cleanEmail,
-
-                username:
-                    cleanUsername,
-
-                displayName:
-                    cleanDisplayName,
-
-                authProvider:
-                    "email",
-
-                googleId:
-                    null,
-
-                passwordHash,
-
-                createdAt:
-                    new Date().toISOString()
-
-            };
+    authProvider:
+        "email",
+    googleId:
+        null,
+    passwordHash,
+    createdAt:
+        new Date().toISOString()
+};
 
 
             users.push(newUser);
@@ -733,7 +740,10 @@ app.get(
                     req.user.username,
 
                 displayName:
-                    req.user.displayName
+                    req.user.displayName,
+
+                displayNameChangedAt:
+                    req.user.displayNameChangedAt
 
             }
 
@@ -742,6 +752,235 @@ app.get(
     }
 );
 
+
+// ========================================
+// เปลี่ยนชื่อที่แสดง
+// PUT /api/auth/display-name
+// ========================================
+
+app.put(
+    "/api/auth/display-name",
+    requireAuth,
+    (req, res) => {
+
+        const displayName =
+            String(
+                req.body.displayName || ""
+            ).trim();
+
+
+        // ========================================
+        // ตรวจสอบชื่อ
+        // ========================================
+
+        if (!displayName) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "กรุณากรอกชื่อที่ต้องการใช้แสดง"
+            });
+
+        }
+
+
+        if (displayName.length < 1) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "ชื่อที่แสดงต้องมีอย่างน้อย 1 ตัวอักษร"
+            });
+
+        }
+
+
+        if (displayName.length > 30) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "ชื่อที่แสดงต้องไม่เกิน 30 ตัวอักษร"
+            });
+
+        }
+
+
+        // ========================================
+        // ถ้าชื่อเหมือนเดิม
+        // ========================================
+
+        if (
+            displayName ===
+            req.user.displayName
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "ชื่อใหม่นี้เหมือนกับชื่อปัจจุบัน"
+            });
+
+        }
+
+
+        // ========================================
+        // ตรวจสอบระยะเวลา 14 วัน
+        // ========================================
+
+        if (
+            req.user.displayNameChangedAt
+        ) {
+
+            const lastChanged =
+                new Date(
+                    req.user.displayNameChangedAt
+                ).getTime();
+
+            const now =
+                Date.now();
+
+            const fourteenDays =
+                14 *
+                24 *
+                60 *
+                60 *
+                1000;
+
+            const timePassed =
+                now -
+                lastChanged;
+
+
+            if (
+                timePassed <
+                fourteenDays
+            ) {
+
+                const remaining =
+                    fourteenDays -
+                    timePassed;
+
+                const remainingDays =
+                    Math.ceil(
+                        remaining /
+                        (
+                            24 *
+                            60 *
+                            60 *
+                            1000
+                        )
+                    );
+
+                return res.status(429).json({
+                    success: false,
+                    message:
+                        `คุณสามารถเปลี่ยนชื่อได้อีกครั้งใน ${remainingDays} วัน`
+                });
+
+            }
+
+        }
+
+
+        // ========================================
+        // เปลี่ยนชื่อ
+        // ========================================
+
+        const oldDisplayName =
+            req.user.displayName;
+
+        const changedAt =
+            new Date().toISOString();
+
+
+        req.user.displayName =
+            displayName;
+
+        req.user.displayNameChangedAt =
+            changedAt;
+
+
+        // ========================================
+        // อัปเดตชื่อใน Forum
+        // ========================================
+
+        forumPosts.forEach(
+            post => {
+
+                if (
+                    Number(post.userId) ===
+                    Number(req.user.id)
+                ) {
+
+                    post.author =
+                        displayName;
+
+                }
+
+
+                if (
+                    Array.isArray(
+                        post.replies
+                    )
+                ) {
+
+                    post.replies.forEach(
+                        reply => {
+
+                            if (
+                                Number(reply.userId) ===
+                                Number(req.user.id)
+                            ) {
+
+                                reply.author =
+                                    displayName;
+
+                            }
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+
+        // ========================================
+        // Response
+        // ========================================
+
+        return res.json({
+
+            success: true,
+
+            message:
+                "เปลี่ยนชื่อสำเร็จ",
+
+            user: {
+
+                id:
+                    req.user.id,
+
+                email:
+                    req.user.email,
+
+                username:
+                    req.user.username,
+
+                displayName:
+                    req.user.displayName,
+
+                displayNameChangedAt:
+                    req.user.displayNameChangedAt
+
+            }
+
+        });
+
+    }
+);
 
 // ========================================
 // Logout
@@ -1607,6 +1846,221 @@ app.get(
     }
 );
 
+/* =====================================
+   FREE THINKING AI
+===================================== */
+
+app.post("/api/free-thinking", async (req, res) => {
+
+    try {
+
+        const {
+            text,
+            quizScores
+        } = req.body;
+
+
+        /* =====================================
+           ตรวจข้อมูล
+        ===================================== */
+
+        if (
+            !text ||
+            typeof text !== "string" ||
+            text.trim().length < 10
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message: "กรุณาเขียนรายละเอียดเพิ่มเติม"
+            });
+
+        }
+
+
+        /* =====================================
+           คะแนนจากแบบทดสอบเดิม
+        ===================================== */
+
+        const scores = {
+
+            science:
+                Number(quizScores?.science) || 0,
+
+            technology:
+                Number(quizScores?.technology) || 0,
+
+            business:
+                Number(quizScores?.business) || 0,
+
+            social:
+                Number(quizScores?.social) || 0,
+
+            creative:
+                Number(quizScores?.creative) || 0
+
+        };
+
+
+        /* =====================================
+           Prompt สำหรับ Gemini
+        ===================================== */
+
+        const prompt = `
+คุณคือ AI สำหรับระบบ SENTANG CHECKPOINT
+ซึ่งเป็นเว็บไซต์ช่วยนักเรียนค้นหาแนวทางการศึกษาต่อและอาชีพที่เหมาะกับความสนใจของตนเอง
+
+หน้าที่ของคุณคือวิเคราะห์ข้อความ Free Thinking ของนักเรียน
+โดยต้องวิเคราะห์ "ความหมายและบริบท" ไม่ใช่ตัดสินจาก keyword เพียงคำเดียว
+
+หลักสำคัญ:
+1. ห้ามสรุปจากคำใดคำหนึ่งเพียงอย่างเดียว
+2. พิจารณาสิ่งที่นักเรียนชอบ ไม่ชอบ วิธีคิด สิ่งที่อยากทำ และสิ่งที่ให้ความสำคัญ
+3. คะแนนจากแบบทดสอบเป็นเพียงข้อมูลประกอบ ไม่ใช่คำตอบตายตัว
+4. ถ้าข้อมูลยังไม่เพียงพอ ให้บอกว่ายังมีความไม่แน่นอน
+5. อย่าบอกว่านักเรียน "ต้อง" เรียนคณะหรืออาชีพใด
+6. ให้เหตุผลจากข้อความของนักเรียนโดยตรง
+7. สามารถมีความสนใจหลายด้านได้
+8. อย่าเลือกผลลัพธ์เพียงเพราะมี keyword ที่ตรงกับหมวดนั้น
+
+หมวดความสนใจที่ระบบใช้:
+
+science = วิทยาศาสตร์ การทดลอง การวิจัย การแพทย์ และการค้นคว้า
+technology = คอมพิวเตอร์ โปรแกรม เทคโนโลยี AI และระบบ
+business = ธุรกิจ การบริหาร การตลาด การเงิน และการเป็นผู้ประกอบการ
+social = ผู้คน สังคม การช่วยเหลือ การสื่อสาร การศึกษา และกฎหมาย
+creative = ศิลปะ การออกแบบ การสร้างสรรค์ สื่อ ดนตรี และคอนเทนต์
+
+ข้อความของนักเรียน:
+"""
+${text.trim()}
+"""
+
+คะแนนจากแบบทดสอบเดิม:
+${JSON.stringify(scores, null, 2)}
+
+วิเคราะห์นักเรียนคนนี้อย่างเป็นกลางและเหมาะกับนักเรียนมัธยมปลาย
+`;
+
+
+        /* =====================================
+           เรียก Gemini
+        ===================================== */
+
+        const response =
+            await ai.models.generateContent({
+
+                model: "gemini-2.5-flash-lite",
+
+                contents: prompt,
+
+                config: {
+
+                    responseMimeType:
+                        "application/json",
+
+                    responseSchema: {
+
+                        type: "object",
+
+                        properties: {
+
+                            summary: {
+                                type: "string"
+                            },
+
+                            interests: {
+                                type: "array",
+                                items: {
+                                    type: "string"
+                                }
+                            },
+
+                            strengths: {
+                                type: "array",
+                                items: {
+                                    type: "string"
+                                }
+                            },
+
+                            areas: {
+                                type: "array",
+                                items: {
+                                    type: "string",
+                                    enum: [
+                                        "science",
+                                        "technology",
+                                        "business",
+                                        "social",
+                                        "creative"
+                                    ]
+                                }
+                            },
+
+                            reason: {
+                                type: "string"
+                            }
+
+                        },
+
+                        required: [
+                            "summary",
+                            "interests",
+                            "strengths",
+                            "areas",
+                            "reason"
+                        ]
+
+                    }
+
+                }
+
+            });
+
+
+        /* =====================================
+           อ่านผลจาก Gemini
+        ===================================== */
+
+        const result =
+            JSON.parse(response.text);
+
+
+        /* =====================================
+           ส่งผลกลับไป Frontend
+        ===================================== */
+
+        res.json({
+
+            success: true,
+
+            result: result,
+
+            quizScores: scores
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Gemini Free Thinking Error:",
+            error
+        );
+
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "ไม่สามารถวิเคราะห์ Free Thinking ได้ในขณะนี้"
+
+        });
+
+    }
+
+});
 
 // ========================================
 // ERROR HANDLER
